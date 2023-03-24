@@ -13,7 +13,6 @@ services:
       - "5432:5432"
     networks:
       - postgres-net
-
   pgadmin:
     container_name: pg-admin
     image: dpage/pgadmin4:latest
