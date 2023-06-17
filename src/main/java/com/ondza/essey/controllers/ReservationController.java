@@ -1,50 +1,51 @@
 package com.ondza.essey.controllers;
 
-
 import com.ondza.essey.entities.Reservation;
-import com.ondza.essey.entities.ResponseModel;
 import com.ondza.essey.services.ReservationService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/reservations")
-@Api(value = "Backend oNDZA ESSEY")
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
-    private ReservationService reservationService;
+    private final ReservationService reservationService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService){
+    public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 
-    @ApiOperation(value = "Get a greeting", response = String.class)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved greeting"),
-            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")
-    })
-    @PostMapping("/new")
-    public ResponseEntity<ResponseModel> createReservation(@RequestBody Reservation reservation) {
-
-        Reservation newReservation = reservationService.createReservation(reservation);
-        ResponseModel responseModel = new ResponseModel("Reservation created successfully ", true, newReservation);
-        return ResponseEntity.ok(responseModel);
-
+    @GetMapping
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        List<Reservation> reservations = reservationService.getAllReservations();
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
-//    @GetMapping("/email")
-//    public ResponseEntity<List<Reservation>> getReservationByEmail(@RequestParam String email) {
-//
-//        List<Reservation> reservations = reservationService.findReservation(email);
-//        ResponseModel responseModel = new ResponseModel("Reservation created successfully ", true, reservations);
-//        return ResponseEntity.ok(responseModel.getReservationList());
-//
-//    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+        Reservation reservation = reservationService.getReservationById(id);
+        return new ResponseEntity<>(reservation, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+        Reservation createdReservation = reservationService.createReservation(reservation);
+        return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
+        Reservation updatedReservation = reservationService.updateReservation(id, reservation);
+        return new ResponseEntity<>(updatedReservation, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

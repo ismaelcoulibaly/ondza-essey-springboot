@@ -15,20 +15,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ondza.essey"))
+                .apis(RequestHandlerSelectors.basePackage("com.ondza.essey.controllers"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Backend oNDZA ESSEY")
+                .title("Your API Title")
                 .description("Your API Description")
                 .version("1.0.0")
                 .build();
-
     }
 }
