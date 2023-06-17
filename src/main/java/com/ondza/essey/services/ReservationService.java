@@ -21,9 +21,18 @@ public class ReservationService {
         // Perform any necessary validations or business logic before creating the reservation
         // For example, check if the desired date and location are available
 
+        String email = reservation.getEmail();
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
         return reservationRepository.save(reservation);
     }
 
+    private boolean isValidEmail(String email) {
+        // Email format regex pattern
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(regex);
+    }
     public Reservation getReservationById(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("Reservation not found with ID: " + reservationId));

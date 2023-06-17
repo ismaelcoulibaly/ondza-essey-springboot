@@ -1,6 +1,7 @@
 package com.ondza.essey.controllers;
 
 import com.ondza.essey.entities.Reservation;
+import com.ondza.essey.services.EmailService;
 import com.ondza.essey.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ import java.util.List;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final EmailService emailService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, EmailService emailService) {
         this.reservationService = reservationService;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -34,6 +37,13 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         Reservation createdReservation = reservationService.createReservation(reservation);
+
+        // Send confirmation email
+        try {
+            emailService.sendEmail(reservation.getEmail(), "Reservation Confirmation", "Your reservation has been confirmed!");
+        } catch (Exception e) {
+            // Handle email sending failure
+        }
         return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
     }
 
