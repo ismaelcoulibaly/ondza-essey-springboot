@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-    @Value("api-key")
+    @Value("${API_KEY}")
     private String apiKey;
 
     public void sendEmail(String to, String subject, String body) throws Exception {

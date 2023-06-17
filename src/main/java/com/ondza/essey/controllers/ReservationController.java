@@ -35,14 +35,14 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) throws Exception {
         Reservation createdReservation = reservationService.createReservation(reservation);
 
         // Send confirmation email
         try {
             emailService.sendEmail(reservation.getEmail(), "Reservation Confirmation", "Your reservation has been confirmed!");
         } catch (Exception e) {
-            // Handle email sending failure
+            throw new Exception("Failed to send email");
         }
         return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
     }
