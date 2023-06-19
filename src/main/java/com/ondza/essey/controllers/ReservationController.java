@@ -1,5 +1,6 @@
 package com.ondza.essey.controllers;
 
+import com.ondza.essey.commons.Constants;
 import com.ondza.essey.entities.Reservation;
 import com.ondza.essey.services.EmailService;
 import com.ondza.essey.services.ReservationService;
@@ -40,7 +41,9 @@ public class ReservationController {
 
         // Send confirmation email
         try {
-            emailService.sendEmail(reservation.getEmail(), "Reservation Confirmation", "Your reservation has been confirmed!");
+            emailService.sendEmailToBooker(reservation.getEmail(), "Reservation Confirmation", "Your reservation has been confirmed!");
+            emailService.sendEmailToChef(Constants.CHEF_EMAIL, "New Reservation", reservation.getFirstName() + " has booked a new reservation " + "\n"
+            + reservation.getReservationType() + reservation.getMessage());
         } catch (Exception e) {
             throw new Exception("Failed to send email");
         }
