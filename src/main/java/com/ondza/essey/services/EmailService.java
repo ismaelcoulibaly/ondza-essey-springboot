@@ -5,11 +5,13 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-    @Value("${API_KEY}")
+    @Value("apiKey")
     private String apiKey;
 
     public void sendEmailToBooker(String to, String subject, String body) throws Exception {
