@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reservations")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -35,7 +36,7 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) throws Exception {
         Reservation createdReservation = reservationService.createReservation(reservation);
 
