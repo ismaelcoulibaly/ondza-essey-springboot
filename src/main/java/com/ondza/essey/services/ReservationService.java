@@ -25,8 +25,14 @@ public class ReservationService {
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email format");
         }
+
         return reservationRepository.save(reservation);
     }
+
+//    private boolean isValidPhone(Integer phone) {
+//        String regex = "";
+//        return phone.toString().matches(regex);
+//    }
 
     private boolean isValidEmail(String email) {
         // Email format regex pattern
