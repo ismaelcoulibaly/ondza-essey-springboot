@@ -18,21 +18,23 @@ public class ReservationService {
     }
 
     public Reservation createReservation(Reservation reservation) {
-        // Perform any necessary validations or business logic before creating the reservation
-        // For example, check if the desired date and location are available
 
         String email = reservation.getEmail();
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email format");
         }
 
+        if(!isValidPhone(reservation.getPhone())){
+            throw new IllegalArgumentException("Invalid Phone format");
+        }
+
         return reservationRepository.save(reservation);
     }
 
-//    private boolean isValidPhone(Integer phone) {
-//        String regex = "";
-//        return phone.toString().matches(regex);
-//    }
+    private boolean isValidPhone(Integer phone) {
+        String regex = "^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+        return phone.toString().matches(regex);
+    }
 
     private boolean isValidEmail(String email) {
         // Email format regex pattern
