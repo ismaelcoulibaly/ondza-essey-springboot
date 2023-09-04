@@ -5,13 +5,11 @@ import com.ondza.essey.repositories.ReservationRepository;
 import com.ondza.essey.repositories.SubscriberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/newsletter")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class NewsletterController {
 
     @Autowired
@@ -21,8 +19,7 @@ public class NewsletterController {
     private ReservationRepository reservationRepository;
     @PostMapping("/subscribe")
     public ResponseEntity<String> subscribe(@RequestParam String email) {
-        if (subscriberRepository.findByEmail(email).isPresent()
-        || reservationRepository.findFirstByEmail(email).isPresent()) {
+        if (subscriberRepository.findByEmail(email).isPresent()) {
             return ResponseEntity.badRequest().body("Email already subscribed");
         }
 

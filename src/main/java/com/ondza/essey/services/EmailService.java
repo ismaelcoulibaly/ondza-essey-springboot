@@ -13,7 +13,7 @@ public class EmailService {
     private String apiKey;
 
     public void sendEmailToBooker(String to, String subject, String body) throws Exception {
-        Email from = new Email("ismael.coulibaly99@gmail.com");
+        Email from = new Email("ondza7@icloud.com");
         Email toEmail = new Email(to);
         Content content = new Content("text/plain", body);
         Mail mail = new Mail(from, subject, toEmail, content);
@@ -32,7 +32,7 @@ public class EmailService {
         }
     }
     public void sendEmailToChef(String to, String subject, String body) throws Exception {
-        Email from = new Email("ismael.coulibaly99@gmail.com");
+        Email from = new Email("ondza7@icloud.com");
         Email toEmail = new Email(to);
         Content content = new Content("text/plain", body);
         Mail mail = new Mail(from, subject, toEmail, content);
