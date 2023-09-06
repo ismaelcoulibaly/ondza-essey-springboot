@@ -18,6 +18,10 @@ public class NewsletterController {
 
     @Autowired
     private ReservationRepository reservationRepository;
+
+
+    @ApiResponse(responseCode = "200", description = "The email has successfully been registered")
+    @ApiResponse(responseCode = "400", description = "Not found")
     @PostMapping("/subscribe")
     public ResponseEntity<String> subscribe(@RequestParam String email) {
         if (subscriberRepository.findByEmail(email).isPresent()) {
