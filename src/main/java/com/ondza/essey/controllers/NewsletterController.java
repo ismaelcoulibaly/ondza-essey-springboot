@@ -3,13 +3,14 @@ package com.ondza.essey.controllers;
 import com.ondza.essey.entities.Subscriber;
 import com.ondza.essey.repositories.ReservationRepository;
 import com.ondza.essey.repositories.SubscriberRepository;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/newsletter")
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class NewsletterController {
 
     @Autowired
