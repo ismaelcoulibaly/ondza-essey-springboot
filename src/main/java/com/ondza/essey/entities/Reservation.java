@@ -1,11 +1,11 @@
 package com.ondza.essey.entities;
 
 import com.ondza.essey.commons.ReservationType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Getter
