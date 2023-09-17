@@ -14,9 +14,9 @@
     <name>ondza-essey-backend</name>
     <description>ondza-essey-backend</description>
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source> <!-- Replace with your desired Java version -->
-        <maven.compiler.target>17</maven.compiler.target> <!-- Replace with your desired Java version -->
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source> <!-- Replace with your desired Java version -->
+        <maven.compiler.target>11</maven.compiler.target> <!-- Replace with your desired Java version -->
     </properties>
     <dependencies>
         <dependency>
