@@ -8,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import org.springframework.http.HttpHeaders;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -18,6 +24,18 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final EmailService emailService;
 
+    @RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
+    public ResponseEntity<Object> favicon(HttpServletResponse response) throws IOException {
+    HttpHeaders headers = new HttpHeaders();
+    headers.add(HttpHeaders.CACHE_CONTROL, "no-store, no-cache, must-revalidate, max-age=0");
+    // ... Rest of your code ...
+    return ResponseEntity
+        .ok()
+        .headers(headers)
+        .body(new HashMap<>());
+
+}
+    
     @Autowired
     public ReservationController(ReservationService reservationService, EmailService emailService) {
         this.reservationService = reservationService;
