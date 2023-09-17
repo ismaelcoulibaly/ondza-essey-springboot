@@ -1,6 +1,5 @@
 package com.ondza.essey.entities;
 
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
