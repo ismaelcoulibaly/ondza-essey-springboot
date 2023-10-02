@@ -54,7 +54,7 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping(path="/create",consumes = "application/json" )
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) throws Exception {
         Reservation createdReservation = reservationService.createReservation(reservation);
 
@@ -69,13 +69,13 @@ public class ReservationController {
         return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path="/{id}", consumes = "application/json")
     public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
         Reservation updatedReservation = reservationService.updateReservation(id, reservation);
         return new ResponseEntity<>(updatedReservation, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path="/{id}", consumes = "application/json")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
