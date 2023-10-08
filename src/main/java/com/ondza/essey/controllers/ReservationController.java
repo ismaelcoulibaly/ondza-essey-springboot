@@ -4,6 +4,8 @@ import com.ondza.essey.commons.Constants;
 import com.ondza.essey.entities.Reservation;
 import com.ondza.essey.services.EmailService;
 import com.ondza.essey.services.ReservationService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +56,11 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
-    @PostMapping(path="/create",consumes = "application/json" )
+    @ApiResponses(value= {
+            @ApiResponse(code = 201, message = "Success, The reservation has been saved!"),
+            @ApiResponse(code = 404, message = "Failure, Error during the creation 0f the reservation!")})
+            @PostMapping(path="/create",consumes = "application/json" )
+
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) throws Exception {
         Reservation createdReservation = reservationService.createReservation(reservation);
 
