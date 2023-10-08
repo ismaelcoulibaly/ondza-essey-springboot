@@ -1,5 +1,6 @@
 package com.ondza.essey.config;
 
+import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -12,6 +13,7 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
+@SwaggerDefinition(schemes = {SwaggerDefinition.Scheme.HTTPS})
 public class SwaggerConfig {
 
     @Bean
