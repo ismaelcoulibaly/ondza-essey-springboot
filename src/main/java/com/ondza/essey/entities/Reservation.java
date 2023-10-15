@@ -55,8 +55,7 @@ public class Reservation {
     private Integer numberOfGuests;
 
 
-    public Reservation(Long id, String firstName, String lastName, String email, String message, ReservationType reservationType, Integer phone, Date dateOfRequest, Date dateOfEvent, Integer numberOfGuests) {
-        this.id = id;
+    public Reservation(String firstName, String lastName, String email, String message, ReservationType reservationType, Integer phone, Date dateOfRequest, Date dateOfEvent, Integer numberOfGuests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
