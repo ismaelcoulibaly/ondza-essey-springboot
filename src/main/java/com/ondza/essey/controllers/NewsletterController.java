@@ -1,7 +1,6 @@
 package com.ondza.essey.controllers;
 
 import com.ondza.essey.entities.Subscriber;
-import com.ondza.essey.repositories.ReservationRepository;
 import com.ondza.essey.repositories.SubscriberRepository;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,6 @@ public class NewsletterController {
     @Autowired
     private SubscriberRepository subscriberRepository;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-
-
     @ApiResponse(responseCode = "200", description = "The email has successfully been registered")
     @ApiResponse(responseCode = "400", description = "Not found")
     @PostMapping("/subscribe")
@@ -33,6 +28,4 @@ public class NewsletterController {
         subscriberRepository.save(subscriber);
         return ResponseEntity.ok("Subscribed successfully");
     }
-
-    // Other newsletter-related endpoints (e.g., send newsletters)
 }

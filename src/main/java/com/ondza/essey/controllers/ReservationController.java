@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/reservations")
-//@CrossOrigin(origins = "http://localhost:3000")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -30,7 +29,7 @@ public class ReservationController {
     public ResponseEntity<Object> favicon(HttpServletResponse response) throws IOException {
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.CACHE_CONTROL, "no-store, no-cache, must-revalidate, max-age=0");
-    // ... Rest of your code ...
+    
     return ResponseEntity
         .ok()
         .headers(headers)
